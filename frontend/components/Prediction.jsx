@@ -1,14 +1,14 @@
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
 import Button from "@mui/material/Button";
 import "./Prediction.css";
 
 const weather = [
   { value: 0, label: "Clear" },
   { value: 1, label: "Rainy" },
-  { value: 2, label: "fog" },
+  { value: 2, label: "Fog" },
 ];
 
 const roadtype = [
@@ -62,6 +62,21 @@ export default function Prediction() {
     }
   };
 
+  const handleUseCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLati(position.coords.latitude);
+        setLongi(position.coords.longitude);
+      }, (error) => {
+        setError(true);
+        console.error("Geolocation error:", error);
+      });
+    } else {
+      setError(true);
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+
   return (
     <div className="predict">
       <form onSubmit={handleSubmit}>
@@ -86,6 +101,14 @@ export default function Prediction() {
           onChange={(e) => setLongi(e.target.value)}
           inputProps={{ step: "0.0001" }}
         />
+
+        <Button
+          variant="contained"
+          onClick={handleUseCurrentLocation}
+          style={{ marginTop: "10px" }}
+        >
+          Use My Location
+        </Button>
 
         <h5>Time (1-24hrs)</h5>
         <TextField
