@@ -13,6 +13,6 @@
 .sos {
   position: fixed;
   top: 500px;
-  right: 0px;
+  left: 0px;
   z-index: 6px;
 }

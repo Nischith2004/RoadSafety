@@ -124,17 +124,20 @@ export default function PersistentDrawerRight({ changePage }) {
       <Drawer
         sx={{
           width: drawerWidth,
+          backgroundColor: "rgba(0,0,255,0.5)",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
+            color: "white",
+            backgroundColor: "rgba(255,255,255,0.5)",
           },
         }}
         variant="persistent"
         anchor="right"
         open={open}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
+          <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -142,8 +145,8 @@ export default function PersistentDrawerRight({ changePage }) {
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <List>
+        <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
+        <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
           {["Home", "Prediction", "history", "profile"].map((text, index) => (
             <ListItem
               key={text}
@@ -159,8 +162,8 @@ export default function PersistentDrawerRight({ changePage }) {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
+        <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
+        <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
           {["Map", "contact"].map((text, index) => (
             <ListItem
               key={text}
