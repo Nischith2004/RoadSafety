@@ -8,7 +8,7 @@ import "./Prediction.css";
 const weather = [
   { value: 0, label: "Clear" },
   { value: 1, label: "Rainy" },
-  { value: 2, label: "Snowy" },
+  { value: 2, label: "fog" },
 ];
 
 const roadtype = [
