@@ -80,7 +80,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight({ changePage }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -148,7 +148,7 @@ export default function PersistentDrawerRight() {
             <ListItem
               key={text}
               disablePadding
-              onClick={() => alert(`Clicked on ${text}`)}
+              onClick={() => changePage(text)}
             >
               <ListItemButton>
                 <ListItemIcon>
@@ -161,11 +161,11 @@ export default function PersistentDrawerRight() {
         </List>
         <Divider />
         <List>
-          {["Map", "comtact"].map((text, index) => (
+          {["Map", "contact"].map((text, index) => (
             <ListItem
               key={text}
               disablePadding
-              onClick={() => alert(`Clicked on ${text}`)}
+              onClick={() => changePage(text)}
             >
               <ListItemButton>
                 <ListItemIcon>

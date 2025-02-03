@@ -1,8 +1,7 @@
 .sos {
-  margin-top: 500px;
   height: 200px;
   width: 200px;
-
+  border-radius: 50%;
   background-color: crimson;
   z-index: 10px;
 }

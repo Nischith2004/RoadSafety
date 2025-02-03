@@ -5,6 +5,14 @@
   /*background-image: url("./assets/roadsafety.jpeg");*/
   background-color: #1e1e1e;
 }
+.pages {
+  padding-top: 20px;
+  background-color: rgb(196, 170, 170);
+  position: relative;
+}
 .sos {
+  position: fixed;
+  top: 500px;
+  right: 0px;
   z-index: 6px;
 }
