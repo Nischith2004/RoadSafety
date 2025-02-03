@@ -1,4 +1,78 @@
 .predict {
   text-align: center;
   margin-bottom: 20px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background-color: #f4f4f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+h5 {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.MuiTextField-root {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.MuiButton-root {
+  margin-top: 10px;
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.MuiButton-root:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+h3 + p {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #007BFF;
+}
+
+.MuiMenuItem-root {
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 600px) {
+  .predict {
+    width: 90%;
+  }
 }
