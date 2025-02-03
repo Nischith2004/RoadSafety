@@ -145,7 +145,11 @@ export default function PersistentDrawerRight() {
         <Divider />
         <List>
           {["Home", "Prediction", "history", "profile"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={() => alert(`Clicked on ${text}`)}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -158,7 +162,11 @@ export default function PersistentDrawerRight() {
         <Divider />
         <List>
           {["Map", "comtact"].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={() => alert(`Clicked on ${text}`)}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
