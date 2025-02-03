@@ -1,13 +1,17 @@
 import { useState } from "react";
-import "../frontend/components/Navbar";
+
 import "./App.css";
 import Navbar from "../frontend/components/Navbar";
 
+import Sos from "../frontend/components/SOS";
 function App() {
   return (
     <>
       <Navbar />
-      <div className="hello">hello</div>
+      <div className="main">
+        <div className="herosection">hello</div>
+        <Sos />
+      </div>
     </>
   );
 }

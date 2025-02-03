@@ -18,6 +18,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { yellow } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -50,6 +51,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
+  backgroundColor: "black",
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -93,9 +95,18 @@ export default function PersistentDrawerRight() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar backgroundColor="black" position="fixed" open={open}>
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+            <img
+              src="caution2.webp"
+              style={{
+                height: "20px",
+                width: "20px",
+
+                marginRight: "10px",
+              }}
+            />
             Road Safety
           </Typography>
           <IconButton
@@ -109,19 +120,7 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
-        <DrawerHeader />
-        <Typography sx={{ marginBottom: 2 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-        </Typography>
-        <Typography sx={{ marginBottom: 2 }}>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-        </Typography>
-      </Main>
+      <Main open={open}></Main>
       <Drawer
         sx={{
           width: drawerWidth,
