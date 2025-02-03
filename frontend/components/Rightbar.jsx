@@ -19,6 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { yellow } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -148,35 +149,40 @@ export default function PersistentDrawerRight({ changePage }) {
         <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
         <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
           {["Home", "Prediction", "history", "profile"].map((text, index) => (
-            <ListItem
-              key={text}
-              disablePadding
-              onClick={() => changePage(text)}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+            <Link to={`/${text.toLowerCase()}`}>
+              {" "}
+              <ListItem
+                key={text}
+                disablePadding
+                onClick={() => changePage(text)}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
         <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
           {["Map", "contact"].map((text, index) => (
-            <ListItem
-              key={text}
-              disablePadding
-              onClick={() => changePage(text)}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+            <Link to={`/${text.toLowerCase()}`}>
+              <ListItem
+                key={text}
+                disablePadding
+                onClick={() => changePage(text)}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>
