@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
 
 import Button from "@mui/material/Button";
 import "./Prediction.css";
@@ -34,22 +35,23 @@ const roadtype = [
 ];
 
 export default function Prediction() {
-  let [longi, setLongi] = useState("");
-  let [lati, setLati] = useState("");
-  let [time, setTime] = useState("");
-  let [weath, setWeath] = useState("");
-  let [roadt, setRoadt] = useState("");
+  let [longi, setLongi] = useState("77.30");
+  let [lati, setLati] = useState("77.30");
+  let [time, setTime] = useState("1 to 24");
+  let [weath, setWeath] = useState("0");
+  let [roadt, setRoadt] = useState("0");
   let [error, setError] = useState(false);
   let getWeatherInfo = async () => {
     try {
       setError(false);
 
       let result = {
-        longi: longi,
-        lati: lati,
+        longitude: longi,
+        latitude: lati,
         time: time,
-        weath: weath,
-        roadt: roadt,
+        weather: weath,
+        road_type: roadt,
+        traffic_volume: 2000,
       };
       console.log(result);
       return result;
@@ -86,7 +88,12 @@ export default function Prediction() {
   return (
     <>
       <div className="predict">
-        <form onSubmit={handleSubmit}>
+        <form
+          method="post"
+          onSubmit={handleSubmit}
+          action="http://127.0.0.1:5000/predict"
+          target="http://localhost:5173/map"
+        >
           <h3>Enter your location</h3>
           <h5>latitude</h5>
           <TextField
@@ -94,7 +101,6 @@ export default function Prediction() {
             id="outlined-required"
             label="Required"
             value={lati}
-            defaultValue="12.46''"
             onChange={handlelati}
           />
           <h5>longitude</h5>
@@ -102,7 +108,6 @@ export default function Prediction() {
             required
             id="outlined-required"
             label="Required"
-            defaultValue="77.30''"
             value={longi}
             onChange={handlelongi}
           />
@@ -111,7 +116,6 @@ export default function Prediction() {
             required
             id="outlined-required"
             label="Required"
-            defaultValue="1 to 24"
             value={time}
             onChange={handletime}
           />
@@ -120,7 +124,6 @@ export default function Prediction() {
             id="weather"
             select
             label="weather"
-            defaultValue="0"
             value={weath}
             onChange={handleweath}
             helperText="Please select weather condition"
@@ -136,7 +139,6 @@ export default function Prediction() {
             id="road"
             select
             label="road"
-            defaultValue="0"
             value={roadt}
             onChange={handleroadt}
             helperText="Please select road condition"
