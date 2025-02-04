@@ -37,6 +37,7 @@ git init
 #### For Windows:
 
 ```powershell
+cd backend
 python -m venv venv
 venv\Scripts\activate
 ```
@@ -44,6 +45,7 @@ venv\Scripts\activate
 #### For macOS/Linux:
 
 ```bash
+cd backend
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -61,6 +63,7 @@ pip install -r requirements.txt
 Install the required node modules in the root project directory (main folder):
 
 ```bash
+cd ..
 npm install
 ```
 
@@ -69,6 +72,7 @@ npm install
 Start the backend server by running the following command in the root project directory:
 
 ```bash
+cd backend
 python server.py
 ```
 
@@ -77,6 +81,7 @@ python server.py
 Run the frontend development server:
 
 ```bash
+cd ..
 npm run dev
 ```
 
@@ -98,4 +103,4 @@ We welcome contributions to improve road safety technologies! If you'd like to c
 
 ## License
 
-This project is licensed under the MIT License.
+This project is not  licensed under the MIT License.
