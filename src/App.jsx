@@ -22,7 +22,7 @@ function App() {
           <Route path="/prediction" element={<Prediction />} />
           <Route path="/home" element={<Home />} />
           <Route
-            path="/history"
+            path="/news"
             element={
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.

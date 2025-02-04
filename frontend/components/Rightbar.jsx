@@ -16,8 +16,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import HomeIcon from "@mui/icons-material/Home";
+import OnlinePredictionIcon from "@mui/icons-material/OnlinePrediction";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
 import { yellow } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 
@@ -52,7 +56,8 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
-  backgroundColor: "black",
+  backgroundImage:
+    "linear-gradient(to right, lightpink,#e6b3e0,#d1acdb,lightblue)",
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -98,7 +103,12 @@ export default function PersistentDrawerRight({ changePage }) {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1, color: "purple", fontWeight: "bold" }}
+            component="div"
+          >
             <img
               src="caution2.webp"
               style={{
@@ -111,7 +121,7 @@ export default function PersistentDrawerRight({ changePage }) {
             Road Safety
           </Typography>
           <IconButton
-            color="inherit"
+            /*  color="inherit"*/
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
@@ -130,15 +140,15 @@ export default function PersistentDrawerRight({ changePage }) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             color: "white",
-            backgroundColor: "rgba(255,255,255,0.5)",
+            backgroundImage: "linear-gradient(to right, #f4b8da, #d2afff)",
           },
         }}
         variant="persistent"
         anchor="right"
         open={open}
       >
-        <DrawerHeader sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
-          <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose} sx={{ color: "black" }}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
             ) : (
@@ -146,9 +156,9 @@ export default function PersistentDrawerRight({ changePage }) {
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
-        <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
-          {["Home", "Prediction", "history", "profile"].map((text, index) => (
+        <Divider />
+        <List>
+          {["Home", "Prediction", "News", "Profile"].map((text, index) => (
             <Link to={`/${text.toLowerCase()}`}>
               {" "}
               <ListItem
@@ -157,18 +167,26 @@ export default function PersistentDrawerRight({ changePage }) {
                 onClick={() => changePage(text)}
               >
                 <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <ListItemIcon sx={{ color: "black" }}>
+                    {index === 0 ? (
+                      <HomeIcon />
+                    ) : index === 1 ? (
+                      <OnlinePredictionIcon />
+                    ) : index === 2 ? (
+                      <HistoryEduIcon />
+                    ) : (
+                      <PersonSearchIcon />
+                    )}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={text} sx={{ color: "black" }} />
                 </ListItemButton>
               </ListItem>
             </Link>
           ))}
         </List>
-        <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
-        <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
-          {["Map", "contact"].map((text, index) => (
+        <Divider />
+        <List>
+          {["Map", "Contact"].map((text, index) => (
             <Link to={`/${text.toLowerCase()}`}>
               <ListItem
                 key={text}
@@ -176,10 +194,10 @@ export default function PersistentDrawerRight({ changePage }) {
                 onClick={() => changePage(text)}
               >
                 <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <ListItemIcon sx={{ color: "black" }}>
+                    {index === 0 ? <AddLocationIcon /> : <ContactMailIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={text} sx={{ color: "black" }} />
                 </ListItemButton>
               </ListItem>
             </Link>
