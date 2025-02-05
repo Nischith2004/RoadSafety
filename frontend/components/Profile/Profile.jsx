@@ -1,4 +1,3 @@
-import "./Profile.css";
 import GradeIcon from "@mui/icons-material/Grade";
 import * as React from "react";
 
