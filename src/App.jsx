@@ -10,6 +10,7 @@ import Login from "../frontend/components/Login";
 import Signup from "../frontend/components/Signup";
 import ProfilePage from "../frontend/components/ProfilePage";
 import Sos from "../frontend/components/SOS";
+import Contact from "../frontend/components/Contact";
 import "./App.css";
 
 function App() {
@@ -71,15 +72,7 @@ function App() {
           {/* Add any other routes you need */}
           <Route
             path="/contact"
-            element={
-              session ? (
-                <p>
-                  Contact page content goes here.
-                </p>
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            element={session ? <Contact /> : <Navigate to="/login" />}
           />
           {/* Fallback Route */}
           <Route path="*" element={<Navigate to="/home" />} />
