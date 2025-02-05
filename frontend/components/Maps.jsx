@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./Maps.css";
 import "leaflet/dist/leaflet.css";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
@@ -9,6 +9,8 @@ const Maps = () => {
     const [markers, setMarkers] = useState([]);
     const [error, setError] = useState("");
     const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+    const [uploadedImage, setUploadedImage] = useState("");
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         Promise.all([
@@ -40,12 +42,73 @@ const Maps = () => {
         }
     }, []);
 
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+            setUploadedImage("");
+            return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+            setError("Please select an image file.");
+            setUploadedImage("");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setUploadedImage(reader.result);
+            setError("");
+        };
+        reader.onerror = () => {
+            setError("Failed to read the file.");
+            setUploadedImage("");
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleAddMarker = () => {
+        const lat = parseFloat(document.getElementById("lat").value);
+        const lng = parseFloat(document.getElementById("lng").value);
+        const imageUrl = document.getElementById("image").value;
+        const imageToUse = uploadedImage || imageUrl;
+
+        if (isNaN(lat) || isNaN(lng) || !imageToUse) {
+            setError("Please fill in all fields correctly.");
+            return;
+        }
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+            setError("Invalid latitude or longitude values.");
+            return;
+        }
+
+        setMarkers([...markers, { geocode: [lat, lng], imageUrl: imageToUse }]);
+        setError("");
+        setUploadedImage("");
+        
+        document.getElementById("lat").value = "";
+        document.getElementById("lng").value = "";
+        document.getElementById("image").value = "";
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    };
+
+    const handleUseCurrentLocation = () => {
+        if (userLocation.lat && userLocation.lng) {
+            document.getElementById("lat").value = userLocation.lat;
+            document.getElementById("lng").value = userLocation.lng;
+        } else {
+            setError("Unable to fetch your location.");
+        }
+    };
+
     if (!LeafletComponents || !Leaflet) return <div>Loading...</div>;
 
     const { MapContainer, TileLayer, Marker, Popup } = LeafletComponents;
     const { Icon, divIcon, point } = Leaflet;
 
-    const markerIconUrl = "/marker-icon.png"; // Assuming marker-icon.png is in the public folder
+    const markerIconUrl = "/marker-icon.png";
 
     const customIcon = new Icon({
         iconUrl: markerIconUrl,
@@ -60,39 +123,6 @@ const Maps = () => {
         });
     };
 
-    const handleAddMarker = () => {
-        const lat = parseFloat(document.getElementById("lat").value);
-        const lng = parseFloat(document.getElementById("lng").value);
-        const imageUrl = document.getElementById("image").value;
-
-        // Input validation
-        if (isNaN(lat) || isNaN(lng) || !imageUrl) {
-            setError("Please fill in all fields correctly.");
-            return;
-        }
-        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
-            setError("Invalid latitude or longitude values.");
-            return;
-        }
-
-        setMarkers([...markers, { geocode: [lat, lng], imageUrl }]);
-        setError("");
-
-        // Clear input fields
-        document.getElementById("lat").value = "";
-        document.getElementById("lng").value = "";
-        document.getElementById("image").value = "";
-    };
-
-    const handleUseCurrentLocation = () => {
-        if (userLocation.lat && userLocation.lng) {
-            document.getElementById("lat").value = userLocation.lat;
-            document.getElementById("lng").value = userLocation.lng;
-        } else {
-            setError("Unable to fetch your location.");
-        }
-    };
-
     return (
         <div className="map-container">
             <div className="user-input">
@@ -102,6 +132,14 @@ const Maps = () => {
                 <input type="number" id="lng" placeholder="Enter longitude (-180 to 180)" />
                 <label htmlFor="image">Image URL:</label>
                 <input type="text" id="image" placeholder="Enter image URL" />
+                <label htmlFor="imageUpload">Or upload image:</label>
+                <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    ref={fileInputRef}
+                />
                 <button onClick={handleAddMarker}>Add Marker</button>
                 <button onClick={handleUseCurrentLocation}>Use My Location</button>
                 {error && <p className="error">{error}</p>}

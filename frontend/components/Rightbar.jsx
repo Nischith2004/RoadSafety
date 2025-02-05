@@ -16,72 +16,44 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { yellow } from "@mui/material/colors";
+import HomeIcon from "@mui/icons-material/Home";
+import MapIcon from "@mui/icons-material/Map";
+import PersonIcon from "@mui/icons-material/Person";
+import LoginIcon from "@mui/icons-material/Login";
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
+import { supabase } from "./supabaseClient"; 
 
 const drawerWidth = 240;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginRight: -drawerWidth,
+const Main = styled("main")(({ theme }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginRight: -drawerWidth,
+}));
 
-    position: "relative",
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          transition: theme.transitions.create("margin", {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-          marginRight: 0,
-        },
-      },
-    ],
-  })
-);
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme }) => ({
+const AppBar = styled(MuiAppBar)(({ theme }) => ({
   backgroundColor: "black",
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(["margin", "width"], {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginRight: drawerWidth,
-      },
-    },
-  ],
 }));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight({ changePage }) {
+export default function PersistentDrawerRight({ changePage, session }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -93,6 +65,10 @@ export default function PersistentDrawerRight({ changePage }) {
     setOpen(false);
   };
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -101,12 +77,8 @@ export default function PersistentDrawerRight({ changePage }) {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
             <img
               src="caution2.webp"
-              style={{
-                height: "20px",
-                width: "20px",
-
-                marginRight: "10px",
-              }}
+              alt="Road Safety"
+              style={{ height: "20px", width: "20px", marginRight: "10px" }}
             />
             Road Safety
           </Typography>
@@ -115,7 +87,7 @@ export default function PersistentDrawerRight({ changePage }) {
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
-            sx={[open && { display: "none" }]}
+            sx={open ? { display: "none" } : {}}
           >
             <MenuIcon />
           </IconButton>
@@ -125,65 +97,75 @@ export default function PersistentDrawerRight({ changePage }) {
       <Drawer
         sx={{
           width: drawerWidth,
-          backgroundColor: "rgba(0,0,255,0.5)",
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            color: "white",
-            backgroundColor: "rgba(255,255,255,0.5)",
+            backgroundColor: "rgba(255,255,255,0.9)",
           },
         }}
         variant="persistent"
         anchor="right"
         open={open}
       >
-        <DrawerHeader sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
-          <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
-            {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose} sx={{ color: "black" }}>
+            {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
-        <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
-          {["Home", "Prediction", "history", "profile"].map((text, index) => (
-            <Link to={`/${text.toLowerCase()}`}>
-              {" "}
-              <ListItem
-                key={text}
-                disablePadding
-                onClick={() => changePage(text)}
-              >
+        <Divider />
+
+        {/* Main Navigation */}
+        <List>
+          {[
+            { text: "Home", icon: <HomeIcon />, path: "/home" },
+            { text: "Prediction", icon: <MapIcon />, path: "/prediction" },
+            { text: "History", icon: <PersonIcon />, path: "/history" },
+            { text: "Profile", icon: <PersonIcon />, path: "/profile" },
+            { text: "Map", icon: <MapIcon />, path: "/map" },
+            { text: "Contact", icon: <PersonIcon />, path: "/contact" },
+          ].map(({ text, icon, path }) => (
+            <Link to={path} key={text} style={{ textDecoration: "none", color: "inherit" }}>
+              <ListItem disablePadding onClick={() => changePage(text)}>
                 <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
+                  <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItemButton>
               </ListItem>
             </Link>
           ))}
         </List>
-        <Divider sx={{ backgroundColor: "rgba(0,0,255,0.5)" }} />
-        <List sx={{ backgroundColor: "rgba(0,0,255,0.5)" }}>
-          {["Map", "contact"].map((text, index) => (
-            <Link to={`/${text.toLowerCase()}`}>
-              <ListItem
-                key={text}
-                disablePadding
-                onClick={() => changePage(text)}
-              >
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            </Link>
-          ))}
+        
+        <Divider />
+
+        {/* Authentication Links */}
+        <List>
+          {!session ? (
+            <>
+              <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon><LoginIcon /></ListItemIcon>
+                    <ListItemText primary="Login" />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+              <Link to="/signup" style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon><AppRegistrationIcon /></ListItemIcon>
+                    <ListItemText primary="Signup" />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            </>
+          ) : (
+            <ListItem disablePadding onClick={handleLogout}>
+              <ListItemButton>
+                <ListItemIcon><LogoutIcon /></ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          )}
         </List>
       </Drawer>
     </Box>
