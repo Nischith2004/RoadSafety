@@ -6,6 +6,8 @@ import Prediction from "../frontend/components/Prediction";
 import Sos from "../frontend/components/SOS";
 import Home from "../frontend/components/Home";
 import Maps from "../frontend/components/Maps";
+import Profiles from "../frontend/components/Profiles";
+import { colors } from "@mui/material";
 
 function App() {
   const [page, setPage] = useState("herosection");
@@ -24,7 +26,7 @@ function App() {
           <Route
             path="/news"
             element={
-              <p>
+              <p style={{ color: "white" }}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Expedita nobis, temporibus dolores, illum quis excepturi
                 laboriosam aut molestiae beatae veritatis vitae maxime ipsam.
@@ -32,21 +34,11 @@ function App() {
               </p>
             }
           />
-          <Route
-            path="/profile"
-            element={
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Expedita nobis, temporibus dolores, illum quis excepturi
-                laboriosam aut molestiae beatae veritatis vitae maxime ipsam.
-                Commodi quia, quae eum earum minus repellat! hello{page}
-              </p>
-            }
-          />
+          <Route path="/profile" element={<Profiles />} />
           <Route
             path="/contact"
             element={
-              <p>
+              <p style={{ color: "white" }}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Expedita nobis, temporibus dolores, illum quis excepturi
                 laboriosam aut molestiae beatae veritatis vitae maxime ipsam.
