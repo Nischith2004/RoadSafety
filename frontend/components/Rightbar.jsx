@@ -17,11 +17,20 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
+
 import MapIcon from "@mui/icons-material/Map";
 import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LogoutIcon from "@mui/icons-material/Logout";
+
+import OnlinePredictionIcon from "@mui/icons-material/OnlinePrediction";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import { yellow } from "@mui/material/colors";
+
 import { Link } from "react-router-dom";
 import { supabase } from "./supabaseClient"; 
 
@@ -38,7 +47,10 @@ const Main = styled("main")(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
-  backgroundColor: "black",
+
+  backgroundImage:
+    "linear-gradient(to right, lightpink,#e6b3e0,#d1acdb,lightblue)",
+
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -74,7 +86,12 @@ export default function PersistentDrawerRight({ changePage, session }) {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1, color: "purple", fontWeight: "bold" }}
+            component="div"
+          >
             <img
               src="caution2.webp"
               alt="Road Safety"
@@ -83,7 +100,7 @@ export default function PersistentDrawerRight({ changePage, session }) {
             Road Safety
           </Typography>
           <IconButton
-            color="inherit"
+            /*  color="inherit"*/
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
@@ -100,7 +117,10 @@ export default function PersistentDrawerRight({ changePage, session }) {
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            backgroundColor: "rgba(255,255,255,0.9)",
+
+            color: "white",
+            backgroundImage: "linear-gradient(to right, #f4b8da, #d2afff)",
+
           },
         }}
         variant="persistent"
@@ -109,6 +129,7 @@ export default function PersistentDrawerRight({ changePage, session }) {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose} sx={{ color: "black" }}>
+
             {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
@@ -129,11 +150,13 @@ export default function PersistentDrawerRight({ changePage, session }) {
                 <ListItemButton>
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText primary={text} />
+
                 </ListItemButton>
               </ListItem>
             </Link>
           ))}
         </List>
+
         
         <Divider />
 
@@ -166,6 +189,7 @@ export default function PersistentDrawerRight({ changePage, session }) {
               </ListItemButton>
             </ListItem>
           )}
+
         </List>
       </Drawer>
     </Box>

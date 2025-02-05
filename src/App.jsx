@@ -7,8 +7,13 @@ import Prediction from "../frontend/components/Prediction";
 import Sos from "../frontend/components/SOS";
 import Home from "../frontend/components/Home";
 import Maps from "../frontend/components/Maps";
+
 import Login from "../frontend/components/Login";
 import Signup from "../frontend/components/Signup";
+
+import Profiles from "../frontend/components/Profiles";
+import { colors } from "@mui/material";
+
 
 function App() {
   const [session, setSession] = useState(null);
@@ -53,8 +58,9 @@ function App() {
           <Route path="/map" element={session ? <Maps /> : <Navigate to="/login" />} />
           <Route path="/prediction" element={session ? <Prediction /> : <Navigate to="/login" />} />
           <Route
-            path="/history"
+            path="/news"
             element={
+
               session ? (
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -80,11 +86,14 @@ function App() {
               ) : (
                 <Navigate to="/login" />
               )
+
             }
           />
+          <Route path="/profile" element={<Profiles />} />
           <Route
             path="/contact"
             element={
+
               session ? (
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -95,6 +104,7 @@ function App() {
               ) : (
                 <Navigate to="/login" />
               )
+
             }
           />
         </Routes>

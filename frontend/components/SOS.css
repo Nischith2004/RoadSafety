@@ -1,7 +1,38 @@
 .sos {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
-  background-color: crimson;
+  background-color: rgba(240, 101, 158, 0.5);
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgb(201, 156, 137), 0px 0px 60px rgb(201, 156, 137),
+    0px 0px 100px rgb(201, 156, 137);
+  animation: colors 15s infinite;
+  backdrop-filter: blur(150px);
   z-index: 10px;
+}
+
+@keyframes colors {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+.sos:before {
+  background-image: repeating-conic-gradient(
+    #96e183 0deg 30deg,
+    #85dc76 30deg 60deg,
+    #d87ce8 60deg 90deg
+  );
+  filter: blur(30px);
+  background-blend-mode: screen;
+
+  backdrop-filter: blur(150px);
+  width: 100px;
+  height: 100px;
+
+  /* opacity: 0.2;*/
+  transform: translate(-40%, -40%);
+  border-radius: 50%;
 }
