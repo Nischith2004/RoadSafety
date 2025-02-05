@@ -1,30 +1,27 @@
+// App.jsx
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "../frontend/components/supabaseClient";
-import "./App.css";
 import Navbar from "../frontend/components/Navbar";
-import Prediction from "../frontend/components/Prediction";
-import Sos from "../frontend/components/SOS";
 import Home from "../frontend/components/Home";
 import Maps from "../frontend/components/Maps";
-
+import Prediction from "../frontend/components/Prediction";
 import Login from "../frontend/components/Login";
 import Signup from "../frontend/components/Signup";
-
-import Profiles from "../frontend/components/Profiles";
-import { colors } from "@mui/material";
-
+import ProfilePage from "../frontend/components/ProfilePage";
+import Sos from "../frontend/components/SOS";
+import "./App.css";
 
 function App() {
   const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState("herosection");
 
   useEffect(() => {
-    // Check for session on initial load
+    // Check for an active session on initial load.
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
-      setLoading(false); // Set loading to false once session is checked
+      setLoading(false);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange(
@@ -41,7 +38,7 @@ function App() {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show a loading indicator while checking session
+    return <div>Loading...</div>;
   }
 
   return (
@@ -54,59 +51,38 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           {/* Protected Routes */}
-          <Route path="/" element={session ? <Home /> : <Navigate to="/login" />} />
-          <Route path="/map" element={session ? <Maps /> : <Navigate to="/login" />} />
-          <Route path="/prediction" element={session ? <Prediction /> : <Navigate to="/login" />} />
           <Route
-            path="/news"
-            element={
-
-              session ? (
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Expedita nobis, temporibus dolores, illum quis excepturi
-                  laboriosam aut molestiae beatae veritatis vitae maxime ipsam.
-                  Commodi quia, quae eum earum minus repellat! hello {page}
-                </p>
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            path="/home"
+            element={session ? <Home /> : <Navigate to="/login" />}
           />
           <Route
-            path="/profile"
-            element={
-              session ? (
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Expedita nobis, temporibus dolores, illum quis excepturi
-                  laboriosam aut molestiae beatae veritatis vitae maxime ipsam.
-                  Commodi quia, quae eum earum minus repellat! hello {page}
-                </p>
-              ) : (
-                <Navigate to="/login" />
-              )
-
-            }
+            path="/map"
+            element={session ? <Maps /> : <Navigate to="/login" />}
           />
-          <Route path="/profile" element={<Profiles />} />
+          <Route
+            path="/prediction"
+            element={session ? <Prediction /> : <Navigate to="/login" />}
+          />
+          {/* Profile Page Route */}
+          <Route
+            path="/profilepage"
+            element={session ? <ProfilePage /> : <Navigate to="/login" />}
+          />
+          {/* Add any other routes you need */}
           <Route
             path="/contact"
             element={
-
               session ? (
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Expedita nobis, temporibus dolores, illum quis excepturi
-                  laboriosam aut molestiae beatae veritatis vitae maxime ipsam.
-                  Commodi quia, quae eum earum minus repellat! hello {page}
+                  Contact page content goes here.
                 </p>
               ) : (
                 <Navigate to="/login" />
               )
-
             }
           />
+          {/* Fallback Route */}
+          <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
 
         <Sos className="sos" />

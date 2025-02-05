@@ -1,3 +1,4 @@
+// PersistentDrawerRight.jsx
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -17,22 +18,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
-
 import MapIcon from "@mui/icons-material/Map";
 import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LogoutIcon from "@mui/icons-material/Logout";
-
-import OnlinePredictionIcon from "@mui/icons-material/OnlinePrediction";
-import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
-import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
-import { yellow } from "@mui/material/colors";
-
 import { Link } from "react-router-dom";
-import { supabase } from "./supabaseClient"; 
+import { supabase } from "./supabaseClient";
 
 const drawerWidth = 240;
 
@@ -47,10 +39,8 @@ const Main = styled("main")(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
-
   backgroundImage:
-    "linear-gradient(to right, lightpink,#e6b3e0,#d1acdb,lightblue)",
-
+    "linear-gradient(to right, lightpink, #e6b3e0, #d1acdb, lightblue)",
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -100,7 +90,6 @@ export default function PersistentDrawerRight({ changePage, session }) {
             Road Safety
           </Typography>
           <IconButton
-            /*  color="inherit"*/
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
@@ -117,10 +106,8 @@ export default function PersistentDrawerRight({ changePage, session }) {
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-
             color: "white",
             backgroundImage: "linear-gradient(to right, #f4b8da, #d2afff)",
-
           },
         }}
         variant="persistent"
@@ -129,8 +116,11 @@ export default function PersistentDrawerRight({ changePage, session }) {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose} sx={{ color: "black" }}>
-
-            {theme.direction === "rtl" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -141,41 +131,55 @@ export default function PersistentDrawerRight({ changePage, session }) {
             { text: "Home", icon: <HomeIcon />, path: "/home" },
             { text: "Prediction", icon: <MapIcon />, path: "/prediction" },
             { text: "History", icon: <PersonIcon />, path: "/history" },
-            { text: "Profile", icon: <PersonIcon />, path: "/profile" },
+            // Updated the Profile route to "/profilepage"
+            { text: "Profile", icon: <PersonIcon />, path: "/profilepage" },
             { text: "Map", icon: <MapIcon />, path: "/map" },
             { text: "Contact", icon: <PersonIcon />, path: "/contact" },
           ].map(({ text, icon, path }) => (
-            <Link to={path} key={text} style={{ textDecoration: "none", color: "inherit" }}>
-              <ListItem disablePadding onClick={() => changePage(text)}>
+            <Link
+              to={path}
+              key={text}
+              style={{ textDecoration: "none", color: "inherit" }}
+              onClick={() => changePage(text)}
+            >
+              <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText primary={text} />
-
                 </ListItemButton>
               </ListItem>
             </Link>
           ))}
         </List>
 
-        
         <Divider />
 
         {/* Authentication Links */}
         <List>
           {!session ? (
             <>
-              <Link to="/login" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <ListItem disablePadding>
                   <ListItemButton>
-                    <ListItemIcon><LoginIcon /></ListItemIcon>
+                    <ListItemIcon>
+                      <LoginIcon />
+                    </ListItemIcon>
                     <ListItemText primary="Login" />
                   </ListItemButton>
                 </ListItem>
               </Link>
-              <Link to="/signup" style={{ textDecoration: "none", color: "inherit" }}>
+              <Link
+                to="/signup"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <ListItem disablePadding>
                   <ListItemButton>
-                    <ListItemIcon><AppRegistrationIcon /></ListItemIcon>
+                    <ListItemIcon>
+                      <AppRegistrationIcon />
+                    </ListItemIcon>
                     <ListItemText primary="Signup" />
                   </ListItemButton>
                 </ListItem>
@@ -184,12 +188,13 @@ export default function PersistentDrawerRight({ changePage, session }) {
           ) : (
             <ListItem disablePadding onClick={handleLogout}>
               <ListItemButton>
-                <ListItemIcon><LogoutIcon /></ListItemIcon>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
                 <ListItemText primary="Logout" />
               </ListItemButton>
             </ListItem>
           )}
-
         </List>
       </Drawer>
     </Box>
