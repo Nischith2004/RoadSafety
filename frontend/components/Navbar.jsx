@@ -1,9 +1,10 @@
 import "./Navbar.css";
 import PersistentDrawerRight from "./Rightbar";
-function Navbar({ changepage }) {
+
+function Navbar({ changepage, session }) {
   return (
     <>
-      <PersistentDrawerRight className="navy" changePage={changepage} />
+      <PersistentDrawerRight className="navy" changePage={changepage} session={session} />
     </>
   );
 }
