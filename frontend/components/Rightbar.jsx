@@ -130,7 +130,7 @@ export default function PersistentDrawerRight({ changePage, session }) {
           {[
             { text: "Home", icon: <HomeIcon />, path: "/home" },
             { text: "Prediction", icon: <MapIcon />, path: "/prediction" },
-            { text: "History", icon: <PersonIcon />, path: "/history" },
+            { text: "News", icon: <PersonIcon />, path: "/news" },
             // Updated the Profile route to "/profilepage"
             { text: "Profile", icon: <PersonIcon />, path: "/profilepage" },
             { text: "Map", icon: <MapIcon />, path: "/map" },
