@@ -25,7 +25,7 @@ function Sos() {
     }
   };*/
   const callSOS = () => {
-    const emergencyNumber = "+916360915512"; // Replace with actual emergency number
+    const emergencyNumber = "+phno."; // Replace with actual emergency number
     window.location.href = `tel:${emergencyNumber}`;
   };
 
