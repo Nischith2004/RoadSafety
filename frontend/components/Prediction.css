@@ -6,7 +6,7 @@
   margin: 0 auto;
   border-radius: 8px;
   background-color: #f4f4f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
 }
 
 h3 {
@@ -28,7 +28,7 @@ h5 {
 
 .MuiButton-root {
   margin-top: 10px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   padding: 10px 20px;
   font-size: 1rem;
@@ -50,7 +50,7 @@ h5 {
 h3 + p {
   margin-top: 20px;
   font-weight: bold;
-  color: #007BFF;
+  color: #007bff;
 }
 
 .MuiMenuItem-root {

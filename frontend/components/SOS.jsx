@@ -1,5 +1,6 @@
 import "./SOS.css";
 import React from "react";
+import "animate.css";
 function Sos() {
   /*  /*This function is for sos message feature
   const sendSOS = () => {
@@ -29,6 +30,13 @@ function Sos() {
     window.location.href = `tel:${emergencyNumber}`;
   };
 
-  return <div className="sos" onClick={callSOS}></div>;
+  return (
+    <div
+      className="animate__animated animate__heartBeat animate__infinite infinite sos"
+      onClick={callSOS}
+    >
+      <span className="sos-text">SOS</span>
+    </div>
+  );
 }
 export default Sos;

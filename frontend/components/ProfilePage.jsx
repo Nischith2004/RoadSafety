@@ -1,24 +1,18 @@
 // ProfilePage.jsx
-import React, { useState, useEffect } from 'react';
-import {
-  Container,
-  TextField,
-  Button,
-  Typography,
-  Box,
-} from '@mui/material';
-import { supabase } from './supabaseClient';
+import React, { useState, useEffect } from "react";
+import { Container, TextField, Button, Typography, Box } from "@mui/material";
+import { supabase } from "./supabaseClient";
 
 const ProfilePage = () => {
   // State to store the authenticated user
   const [user, setUser] = useState(null);
   // Local state for the profile form. Initially, only email is known.
   const [profile, setProfile] = useState({
-    email: '',
-    name: '',
-    contact: '',
-    age: '',
-    bio: '',
+    email: "",
+    name: "",
+    contact: "",
+    age: "",
+    bio: "",
   });
   // Loading state for async operations.
   const [loading, setLoading] = useState(false);
@@ -28,7 +22,9 @@ const ProfilePage = () => {
   // When the component mounts, fetch the current user and load profile details.
   useEffect(() => {
     const getUserAndProfile = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
         // Set email from the authenticated user
@@ -44,9 +40,9 @@ const ProfilePage = () => {
   const fetchProfile = async (user) => {
     try {
       let { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
         .maybeSingle();
 
       if (error) throw error;
@@ -54,7 +50,7 @@ const ProfilePage = () => {
       // If no profile exists, insert one with the user's email.
       if (!data) {
         const { data: newProfile, error: insertError } = await supabase
-          .from('profiles')
+          .from("profiles")
           .insert([{ id: user.id, email: user.email }])
           .select()
           .maybeSingle();
@@ -64,13 +60,13 @@ const ProfilePage = () => {
 
       setProfile({
         email: data.email || user.email,
-        name: data.name || '',
-        contact: data.contact || '',
-        age: data.age || '',
-        bio: data.bio || '',
+        name: data.name || "",
+        contact: data.contact || "",
+        age: data.age || "",
+        bio: data.bio || "",
       });
     } catch (error) {
-      console.error('Error fetching profile:', error.message);
+      console.error("Error fetching profile:", error.message);
     }
   };
 
@@ -86,20 +82,20 @@ const ProfilePage = () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from('profiles')
+        .from("profiles")
         .update({
           name: profile.name,
           contact: profile.contact,
           age: profile.age,
           bio: profile.bio,
         })
-        .eq('id', user.id);
+        .eq("id", user.id);
       if (error) throw error;
-      console.log('Profile updated:', data);
+      console.log("Profile updated:", data);
       // Exit edit mode after successful update.
       setIsEditing(false);
     } catch (error) {
-      console.error('Error updating profile:', error.message);
+      console.error("Error updating profile:", error.message);
     } finally {
       setLoading(false);
     }
@@ -115,7 +111,7 @@ const ProfilePage = () => {
   if (!user) return <div>Loading...</div>;
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <Container maxWidth="md" sx={{ mt: 4, height: "100vh" }}>
       <Typography variant="h4" gutterBottom>
         Profile
       </Typography>
@@ -177,7 +173,7 @@ const ProfilePage = () => {
               disabled={loading}
               sx={{ mt: 2, mr: 2 }}
             >
-              {loading ? 'Updating...' : 'Save'}
+              {loading ? "Updating..." : "Save"}
             </Button>
             <Button
               variant="outlined"

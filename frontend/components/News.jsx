@@ -40,20 +40,33 @@ const News = () => {
   }, []);
 
   // Filter news based on keywords for "accident" news
-  const accidentKeywords = ["accident", "crash", "collision", "wreck", "incident"];
+  const accidentKeywords = [
+    "accident",
+    "crash",
+    "collision",
+    "wreck",
+    "incident",
+  ];
   const filteredNews =
     filter === "accident"
       ? news.filter((item) =>
           accidentKeywords.some(
             (keyword) =>
               (item.title && item.title.toLowerCase().includes(keyword)) ||
-              (item.description && item.description.toLowerCase().includes(keyword))
+              (item.description &&
+                item.description.toLowerCase().includes(keyword))
           )
         )
       : news;
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div
+      style={{
+        padding: "20px",
+        fontFamily: "Arial, sans-serif",
+        height: "100vh",
+      }}
+    >
       <h1>News from India</h1>
 
       {/* Filter Selection */}
@@ -75,7 +88,11 @@ const News = () => {
       <button
         onClick={fetchNews}
         disabled={loading}
-        style={{ marginBottom: "20px", padding: "10px 20px", cursor: "pointer" }}
+        style={{
+          marginBottom: "20px",
+          padding: "10px 20px",
+          cursor: "pointer",
+        }}
       >
         {loading ? "Refreshing..." : "Refresh News"}
       </button>
@@ -85,35 +102,35 @@ const News = () => {
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
       {/* Display News Items */}
-      {filteredNews.length > 0 ? (
-        filteredNews.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-              padding: "15px",
-              marginBottom: "15px",
-            }}
-          >
-            <h2>{item.title}</h2>
-            <p>{item.description || "No description available"}</p>
-            <p style={{ fontSize: "0.9em", color: "#555" }}>
-              Published:{" "}
-              {item.pubDate ? new Date(item.pubDate).toLocaleString() : "Unknown date"}
-            </p>
-            {item.link && (
-              <p>
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  Read More
-                </a>
+      {filteredNews.length > 0
+        ? filteredNews.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                padding: "15px",
+                marginBottom: "15px",
+              }}
+            >
+              <h2>{item.title}</h2>
+              <p>{item.description || "No description available"}</p>
+              <p style={{ fontSize: "0.9em", color: "#555" }}>
+                Published:{" "}
+                {item.pubDate
+                  ? new Date(item.pubDate).toLocaleString()
+                  : "Unknown date"}
               </p>
-            )}
-          </div>
-        ))
-      ) : (
-        !loading && <p>No news items found.</p>
-      )}
+              {item.link && (
+                <p>
+                  <a href={item.link} target="_blank" rel="noopener noreferrer">
+                    Read More
+                  </a>
+                </p>
+              )}
+            </div>
+          ))
+        : !loading && <p>No news items found.</p>}
     </div>
   );
 };

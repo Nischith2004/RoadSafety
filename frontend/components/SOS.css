@@ -1,38 +1,45 @@
 .sos {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  background-color: rgba(240, 101, 158, 0.5);
+  margin-left: 40px;
+
+  height: 70px; /* Button height */
+  width: 70px; /* Button width */
+  border-radius: 12px; /* Rounded edges */
+  background-color: #cb0000; /* Red color for urgency */
   cursor: pointer;
-  box-shadow: 0px 0px 20px rgb(201, 156, 137), 0px 0px 60px rgb(201, 156, 137),
-    0px 0px 100px rgb(201, 156, 137);
-  animation: colors 15s infinite;
-  backdrop-filter: blur(150px);
-  z-index: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+
+  animation-duration: 100000s;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Positioning the button fixed on the screen */
+
+  /* Position the button in the left corner */
+  left: 20px; /* Add space from the left edge. Adjust this value for more/less space */
+  bottom: 10px; /* Add space from the bottom edge. Adjust this value for more/less space */
+  cursor: pointer;
+
+  z-index: 10; /* Ensures button stays above other content */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sos:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes colors {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
+.sos-text {
+  color: white;
+  font-size: 18px; /* Adjusted font size */
+  font-weight: bold;
+  text-align: center;
 }
+
 .sos:before {
-  background-image: repeating-conic-gradient(
-    #96e183 0deg 30deg,
-    #85dc76 30deg 60deg,
-    #d87ce8 60deg 90deg
-  );
-  filter: blur(30px);
-  background-blend-mode: screen;
-
-  backdrop-filter: blur(150px);
-  width: 100px;
-  height: 100px;
-
-  /* opacity: 0.2;*/
-  transform: translate(-40%, -40%);
-  border-radius: 50%;
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-color: transparent; /* Removed darker background */
+  border-radius: 12px; /* Rounded edges for the background */
+  z-index: -1;
 }

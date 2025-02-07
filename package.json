@@ -17,6 +17,7 @@
     "@mui/material": "^6.4.2",
     "@mui/styled-engine-sc": "^6.4.2",
     "@supabase/supabase-js": "^2.48.1",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
     "leaflet": "^1.9.4",

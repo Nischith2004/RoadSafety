@@ -23,6 +23,11 @@ import PersonIcon from "@mui/icons-material/Person";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LogoutIcon from "@mui/icons-material/Logout";
+import OnlinePredictionIcon from "@mui/icons-material/OnlinePrediction";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
 import { Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 
@@ -39,8 +44,7 @@ const Main = styled("main")(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
-  backgroundImage:
-    "linear-gradient(to right, lightpink, #e6b3e0, #d1acdb, lightblue)",
+  backgroundColor: "#3d405b",
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -79,11 +83,11 @@ export default function PersistentDrawerRight({ changePage, session }) {
           <Typography
             variant="h6"
             noWrap
-            sx={{ flexGrow: 1, color: "purple", fontWeight: "bold" }}
+            sx={{ flexGrow: 1, color: "white", fontWeight: "bold" }}
             component="div"
           >
             <img
-              src="caution2.webp"
+              src="../src/assets/roadsafetylogo.webp"
               alt="Road Safety"
               style={{ height: "20px", width: "20px", marginRight: "10px" }}
             />
@@ -95,7 +99,7 @@ export default function PersistentDrawerRight({ changePage, session }) {
             onClick={handleDrawerOpen}
             sx={open ? { display: "none" } : {}}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: "white" }} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -107,7 +111,7 @@ export default function PersistentDrawerRight({ changePage, session }) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             color: "white",
-            backgroundImage: "linear-gradient(to right, #f4b8da, #d2afff)",
+            backgroundColor: " #8d8c86",
           },
         }}
         variant="persistent"
@@ -129,12 +133,20 @@ export default function PersistentDrawerRight({ changePage, session }) {
         <List>
           {[
             { text: "Home", icon: <HomeIcon />, path: "/home" },
-            { text: "Prediction", icon: <MapIcon />, path: "/prediction" },
-            { text: "News", icon: <PersonIcon />, path: "/news" },
+            {
+              text: "Prediction",
+              icon: <OnlinePredictionIcon />,
+              path: "/prediction",
+            },
+            { text: "News", icon: <NewspaperIcon />, path: "/news" },
             // Updated the Profile route to "/profilepage"
-            { text: "Profile", icon: <PersonIcon />, path: "/profilepage" },
-            { text: "Map", icon: <MapIcon />, path: "/map" },
-            { text: "Contact", icon: <PersonIcon />, path: "/contact" },
+            {
+              text: "Profile",
+              icon: <AccountCircleIcon />,
+              path: "/profilepage",
+            },
+            { text: "Map", icon: <AddLocationAltIcon />, path: "/map" },
+            { text: "Contact", icon: <ContactMailIcon />, path: "/contact" },
           ].map(({ text, icon, path }) => (
             <Link
               to={path}
