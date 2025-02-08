@@ -1,7 +1,142 @@
 .home {
-  height: 100vh;
-  width: 100vw;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #1a237e, #0d47a1);
   color: white;
-  background-color: black;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.features {
+  margin: 4rem 0;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-card {
+  padding: 2rem;
+  border-radius: 10px;
+  background: #f8f9fa;
+  transition: transform 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.upcoming-features {
+  background: #fff3e0;
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 3rem 0;
+}
+
+.feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.upcoming-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.badge {
+  background: #ff9100;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  margin-right: 1rem;
+  font-size: 0.9rem;
+}
+
+.cta-section {
+  text-align: center;
+  padding: 4rem 0;
+  background: #e8f5e9;
+  border-radius: 15px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.primary-cta {
+  background: #2e7d32;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.secondary-cta {
+  background: transparent;
+  color: #2e7d32;
+  padding: 1rem 2rem;
+  border: 2px solid #2e7d32;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-cta:hover {
+  background: #1b5e20;
+}
+
+.secondary-cta:hover {
+  background: #2e7d32;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 10px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
 }
