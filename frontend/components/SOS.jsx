@@ -1,4 +1,5 @@
 import "./SOS.css";
+import React from "react";
 import "animate.css";
 function Sos() {
   /*  /*This function is for sos message feature
