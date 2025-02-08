@@ -4,7 +4,7 @@ import "animate.css";
 function Sos() {
   /*  /*This function is for sos message feature
   const sendSOS = () => {
-    const phone = "+91phno."; 
+    const phone = "+91phno.";
     let smsUrl = `sms:${phone}?body=Emergency! I need help!`;
 
     if (navigator.geolocation) {
