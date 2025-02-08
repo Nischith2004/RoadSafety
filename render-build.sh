@@ -5,7 +5,18 @@ echo "Updating package lists..."
 apt-get update
 
 echo "Installing system dependencies..."
-apt-get install -y libgirepository1.0-dev gir1.2-gtk-3.0 brltty liblouis-bin libsnmp-dev snmp libpwquality-dev 
+apt-get install -y \
+    libgirepository1.0-dev \
+    gir1.2-gtk-3.0 \
+    gobject-introspection \
+    libffi-dev \
+    libcairo2-dev \
+    pkg-config \
+    python3-dev \
+    libpango1.0-dev \
+    libatk1.0-dev \
+    libgdk-pixbuf2.0-dev \
+    libglib2.0-dev
 
 echo "Removing unavailable Python dependencies..."
 sed -i '/^Brlapi==/d' requirements.txt        # Remove Brlapi if present
