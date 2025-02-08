@@ -21,8 +21,16 @@ apt-get install -y \
     meson \
     ninja-build
 
-echo "Checking if gobject-introspection is installed..."
-pkg-config --exists gobject-introspection-1.0 && echo "gobject-introspection found" || echo "gobject-introspection NOT found"
+echo "Setting PKG_CONFIG_PATH..."
+export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/share/pkgconfig:$PKG_CONFIG_PATH
+
+echo "Checking gobject-introspection-1.0 installation..."
+if pkg-config --exists gobject-introspection-1.0; then
+    echo "gobject-introspection-1.0 found: $(pkg-config --modversion gobject-introspection-1.0)"
+else
+    echo "gobject-introspection-1.0 NOT found. Please check installation."
+    exit 1
+fi
 
 echo "Removing unavailable Python dependencies..."
 sed -i '/^Brlapi==/d' requirements.txt        # Remove Brlapi if present
@@ -33,3 +41,4 @@ sed -i '/^pwquality==/d' requirements.txt     # Remove pwquality if present
 echo "Installing Python dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
+pip install pygobject  # Explicitly install pygobject
