@@ -59,11 +59,11 @@ function App() {
           />
           <Route
             path="/map"
-            element={session ? <Maps /> : <Navigate to="/login" />}
+            element={<Maps />}
           />
           <Route
             path="/prediction"
-            element={session ? <Prediction /> : <Navigate to="/login" />}
+            element={<Prediction />}
           />
           {/* Profile Page Route */}
           <Route
@@ -73,14 +73,14 @@ function App() {
           {/* Add any other routes you need */}
           <Route
             path="/contact"
-            element={session ? <Contact /> : <Navigate to="/login" />}
+            element={<Contact />}
           />
           <Route
             path="/news"
-            element={session ? <News /> : <Navigate to="/login" />}
+            element={<News />}
           />
           {/* Fallback Route */}
-          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
         <Sos className="sos" />
