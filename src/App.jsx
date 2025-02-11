@@ -80,7 +80,7 @@ function App() {
             element={<News />}
           />
           {/* Fallback Route */}
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
 
         <Sos className="sos" />
